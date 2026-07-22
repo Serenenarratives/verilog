@@ -2,17 +2,21 @@ module full_adderbit(
 input[3:0] A,
 input[3:0] B,
 input Cin ,
-input Cout,
+output Cout,
 output[3:0] Sum 
 );
+
+wire t0, t1, t2;
+
 //stage1: adds least significant bits
 full_adder fa0(
 A(A[0]),
 B(B[0]),
-Cin(Cin)
+Cin(Cin),
 Sum(Sum[0]),
 Cout(t0)
 );
+
 //stage2: adds the second bits using the carry from the stage 1
 full_adder fa1(
 A(A[1]),
@@ -31,8 +35,8 @@ Sum(Sum[2]),
 Cout(t2)
 );
 
-//stage4:adds the most significant bits using the carry from stage 2
-full_addder fa3 (
+//stage4:adds the most significant bits using the carry from stage 3
+full_adder fa3 (
 A(A[3]),
 B(B[3]),
 Cin(t2),
@@ -40,30 +44,4 @@ Sum(Sum[3]),
 Cout(Cout)
 );
 
-Endmodule
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+endmodule
