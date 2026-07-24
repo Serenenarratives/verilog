@@ -1,1 +1,48 @@
-
+module alu_4bit(
+input[3:0]a,b,
+input[2:0]Op,
+output reg [3:0] Result,
+output reg[3:0] Carryout 
+);
+reg [4:0] tmp_result;
+always@(*) begin 
+Carryout=1'b0;
+tmp_result=5'b0;
+case(Op)
+3'b000:begin
+tmp_result=a+b;
+Result=tmp_result[3:0];
+Carryout=tmp_result[4];
+end 
+3'b001:begin
+tmp_result=a-b;
+Result=tmp_result[3:0];
+Carryout=tmp_result[4];
+end
+3'b011:begin
+Result=a|b;
+Carryout=1'b0;
+end
+3'b100:begin
+Result=a^b;
+Carryout=1'b0;
+end 
+3'b10:begin
+Result=~a;
+Carryout=1'b0;
+end
+3'b110:begin
+Result=a<<1;
+Carryout=a[3];
+end
+3'b111:begin
+Result=a>>1;
+Carryout=a[0];
+end
+default:begin
+Result=4'b000;
+Carryout=1'b0;
+end
+endcase
+end
+endmodule
