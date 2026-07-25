@@ -1,13 +1,13 @@
 module decoder2_4(
 input[1:0]A,
-input B
+input B,
 output reg[3:0] Y
 );
 always@(A,B)begin
 if(B==1'b0)begin
 Y=4'b0000;
 end 
-elsebegin
+else begin
 case(A)
 2'b00:Y=4'b1000;
 2'b01:Y=4'b0100;
